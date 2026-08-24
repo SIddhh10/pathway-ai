@@ -25,8 +25,8 @@ export default function SettingsPage() {
     <AppLayout>
       <div className="space-y-6">
         <div>
-          <h1 className="text-xl font-bold tracking-tight">Settings</h1>
-          <p className="text-sm text-muted-foreground">
+          <h1 className="text-lg font-bold tracking-tight sm:text-xl">Settings</h1>
+          <p className="text-xs text-muted-foreground sm:text-sm">
             Account and preferences
           </p>
         </div>

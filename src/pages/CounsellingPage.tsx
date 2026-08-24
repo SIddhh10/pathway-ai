@@ -49,31 +49,31 @@ export default function CounsellingPage() {
 
   return (
     <AppLayout>
-      <div className="space-y-6">
-        <div className="flex items-center justify-between">
+      <div className="space-y-4">
+        <div className="flex items-center justify-between gap-3">
           <div>
             <h1 className="text-xl font-bold tracking-tight">Counselling</h1>
             <p className="text-sm text-muted-foreground">
               Upcoming and completed sessions
             </p>
           </div>
-          <Button className="gap-2 bg-primary text-primary-foreground hover:bg-primary/90">
-            <Plus className="h-4 w-4" />
-            Schedule New Session
+          <Button size="sm" className="gap-1.5 bg-primary text-primary-foreground hover:bg-primary/90 sm:gap-2">
+            <Plus className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+            <span className="hidden sm:inline">Schedule New Session</span>
+            <span className="sm:hidden">New</span>
           </Button>
         </div>
 
-        {/* Stats */}
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+        {/* Stats */}            <div className="grid grid-cols-3 gap-2 sm:gap-3">
           {[
             { label: "Upcoming", value: upcoming.length, color: "text-primary" },
             { label: "Completed", value: completed.length, color: "text-risk-low" },
             { label: "Total", value: counsellingSessions.length, color: "text-foreground" },
           ].map((stat) => (
             <Card key={stat.label} className="border-white/[0.06] bg-card/40">
-              <CardContent className="p-4">
-                <p className="text-xs text-muted-foreground">{stat.label}</p>
-                <p className={`mt-1 text-2xl font-bold ${stat.color}`}>
+              <CardContent className="p-3 sm:p-4">
+                <p className="text-[10px] text-muted-foreground sm:text-xs">{stat.label}</p>
+                <p className={`mt-1 text-lg font-bold sm:text-2xl ${stat.color}`}>
                   {stat.value}
                 </p>
               </CardContent>
@@ -95,15 +95,15 @@ export default function CounsellingPage() {
                 return (
                   <div
                     key={session.id}
-                    className="flex items-center justify-between rounded-lg border border-white/[0.06] bg-white/[0.02] p-4 transition-colors hover:bg-white/[0.04]"
+                    className="rounded-lg border border-white/[0.06] bg-white/[0.02] p-3 transition-colors hover:bg-white/[0.04] sm:flex sm:items-center sm:justify-between"
                   >
-                    <div className="flex items-center gap-4">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                        <Calendar className="h-5 w-5" />
+                    <div className="flex items-center gap-3">
+                      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary sm:h-10 sm:w-10">
+                        <Calendar className="h-4 w-4 sm:h-5 sm:w-5" />
                       </div>
                       <div>
-                        <p className="font-medium">{session.studentName}</p>
-                        <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                        <p className="text-sm font-medium">{session.studentName}</p>
+                        <div className="flex flex-wrap items-center gap-x-3 gap-y-0.5 text-[10px] text-muted-foreground sm:text-xs">
                           <span className="flex items-center gap-1">
                             <User className="h-3 w-3" />
                             {session.mentorName}
@@ -119,12 +119,7 @@ export default function CounsellingPage() {
                         </div>
                       </div>
                     </div>
-                    <div className="flex items-center gap-3">
-                      {session.notes && (
-                        <p className="mt-1.5 text-[11px] text-muted-foreground italic max-w-md">
-                          {session.notes}
-                        </p>
-                      )}
+                    <div className="mt-2 flex items-center gap-2 sm:mt-0">
                       <span
                         className={`flex items-center gap-1 rounded-full px-2.5 py-1 text-[10px] font-medium ${config.bg} ${config.color}`}
                       >
@@ -151,15 +146,15 @@ export default function CounsellingPage() {
               {completed.map((session) => (
                 <div
                   key={session.id}
-                  className="flex items-center justify-between rounded-lg border border-white/[0.06] bg-white/[0.02] p-4 opacity-70 transition-colors hover:opacity-100"
+                  className="rounded-lg border border-white/[0.06] bg-white/[0.02] p-3 opacity-70 transition-colors hover:opacity-100 sm:flex sm:items-center sm:justify-between"
                 >
-                  <div className="flex items-center gap-4">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-risk-low/10 text-risk-low">
-                      <CheckCircle2 className="h-5 w-5" />
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-risk-low/10 text-risk-low sm:h-10 sm:w-10">
+                      <CheckCircle2 className="h-4 w-4 sm:h-5 sm:w-5" />
                     </div>
                     <div>
-                      <p className="font-medium">{session.studentName}</p>
-                      <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                      <p className="text-sm font-medium">{session.studentName}</p>
+                      <div className="flex flex-wrap items-center gap-x-3 gap-y-0.5 text-[10px] text-muted-foreground sm:text-xs">
                         <span>{session.mentorName}</span>
                         <span>{session.date}</span>
                         <span>{session.time}</span>
@@ -171,7 +166,7 @@ export default function CounsellingPage() {
                       )}
                     </div>
                   </div>
-                  <span className="flex items-center gap-1 rounded-full bg-risk-low/10 px-2.5 py-1 text-[10px] font-medium text-risk-low">
+                  <span className="mt-1.5 flex items-center gap-1 self-start rounded-full bg-risk-low/10 px-2 py-0.5 text-[9px] font-medium text-risk-low sm:mt-0 sm:text-[10px]">
                     <CheckCircle2 className="h-3 w-3" />
                     Completed
                   </span>

@@ -68,23 +68,23 @@ export default function UploadPage() {
 
   return (
     <AppLayout>
-      <div className="space-y-6">
+      <div className="space-y-4">
         <div>
-          <h1 className="text-xl font-bold tracking-tight">Upload Data</h1>
-          <p className="text-sm text-muted-foreground">
+          <h1 className="text-lg font-bold tracking-tight sm:text-xl">Upload Data</h1>
+          <p className="text-xs text-muted-foreground sm:text-sm">
             Import student records to update risk scores
           </p>
         </div>
 
         {/* Upload Cards */}
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
           {uploads.map((card) => (
             <Card
               key={card.id}
               className="border-white/[0.06] bg-card/60 backdrop-blur-sm transition-all duration-200 hover:border-white/[0.1]"
             >
-              <CardContent className="flex items-start gap-4 p-5">
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+              <CardContent className="flex items-start gap-3 p-3 sm:gap-4 sm:p-5">
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary sm:h-11 sm:w-11">
                   <card.icon className="h-5 w-5" />
                 </div>
                 <div className="flex-1">
@@ -146,8 +146,7 @@ export default function UploadPage() {
         )}
 
         {/* Loading Animation */}
-        {analyzing && (
-          <Card className="border-white/[0.06] bg-card/60 backdrop-blur-sm">
+        {analyzing && (              <Card className="border-white/[0.06] bg-card/40">
             <CardContent className="flex flex-col items-center justify-center py-16">
               <div className="relative">
                 <div className="h-16 w-16 animate-spin rounded-full border-4 border-primary/20 border-t-primary" />

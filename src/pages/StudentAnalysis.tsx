@@ -104,9 +104,9 @@ export default function StudentAnalysis() {
 
   return (
     <AppLayout>
-      <div className="space-y-6">
+      <div className="space-y-4">
         {/* Header */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
           <Button
             variant="ghost"
             size="sm"
@@ -117,10 +117,10 @@ export default function StudentAnalysis() {
             Back
           </Button>
           <div>
-            <h1 className="text-2xl font-bold tracking-tight">
+            <h1 className="text-lg font-bold tracking-tight sm:text-xl">
               Student Analysis
             </h1>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-xs text-muted-foreground sm:text-sm">
               Risk assessment breakdown and recommended actions
             </p>
           </div>
@@ -128,8 +128,7 @@ export default function StudentAnalysis() {
 
         {/* Profile + Risk Score */}
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
-          {/* Student Profile */}
-          <Card className="border-white/[0.06] bg-card/40 lg:col-span-1">
+          {/* Student Profile */}              <Card className="border-white/[0.06] bg-card/40">
             <CardHeader>
               <CardTitle className="text-sm font-medium">
                 Student Profile
@@ -205,7 +204,7 @@ export default function StudentAnalysis() {
           </Card>
 
           {/* AI Risk Score */}
-          <Card className="border-white/[0.06] bg-card/40 lg:col-span-2">
+          <Card className="border-white/[0.06] bg-card/40">
             <CardHeader>
             <CardTitle className="text-sm font-medium">
               Risk Score
@@ -268,31 +267,34 @@ export default function StudentAnalysis() {
             <p className="mb-6 text-sm leading-relaxed text-muted-foreground">
               {student.recommendedAction}
             </p>
-            <div className="flex flex-wrap gap-3">
-              <Button className="gap-2 bg-primary text-primary-foreground hover:bg-primary/90">
-                <Calendar className="h-4 w-4" />
+            <div className="flex flex-wrap gap-2 sm:gap-3">
+              <Button size="sm" className="gap-1.5 bg-primary text-primary-foreground hover:bg-primary/90 sm:gap-2 sm:text-sm">
+                <Calendar className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                 Schedule Counselling
               </Button>
               <Button
                 variant="outline"
-                className="gap-2 border-white/[0.1] bg-white/[0.03]"
+                size="sm"
+                className="gap-1.5 border-white/[0.1] bg-white/[0.03] sm:gap-2 sm:text-sm"
               >
-                <MessageSquare className="h-4 w-4" />
+                <MessageSquare className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                 Notify Mentor
               </Button>
               <Button
                 variant="outline"
-                className="gap-2 border-white/[0.1] bg-white/[0.03]"
+                size="sm"
+                className="gap-1.5 border-white/[0.1] bg-white/[0.03] sm:gap-2 sm:text-sm"
               >
-                <Phone className="h-4 w-4" />
+                <Phone className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                 Notify Guardian
               </Button>
               <Button
                 variant="outline"
-                className="gap-2 border-white/[0.1] bg-white/[0.03]"
+                size="sm"
+                className="gap-1.5 border-white/[0.1] bg-white/[0.03] sm:gap-2 sm:text-sm"
               >
-                <CheckCircle2 className="h-4 w-4" />
-                Mark as Reviewed
+                <CheckCircle2 className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                Reviewed
               </Button>
             </div>
           </CardContent>

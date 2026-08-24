@@ -51,11 +51,11 @@ export default function NotificationsPage() {
 
   return (
     <AppLayout>
-      <div className="space-y-6">
-        <div className="flex items-center justify-between">
+      <div className="space-y-4">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h1 className="text-xl font-bold tracking-tight">Notifications</h1>
-            <p className="text-sm text-muted-foreground">
+            <h1 className="text-lg font-bold tracking-tight sm:text-xl">Notifications</h1>
+            <p className="text-xs text-muted-foreground sm:text-sm">
               Recent alerts and updates
             </p>
           </div>
@@ -89,23 +89,23 @@ export default function NotificationsPage() {
                     : "opacity-70"
                 }`}
               >
-                <CardContent className="flex items-start gap-4 p-4">
+                <CardContent className="flex items-start gap-3 p-3 sm:gap-4 sm:p-4">
                   <div
-                    className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg ${config.bg}`}
+                    className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-md ${config.bg} sm:h-9 sm:w-9 sm:rounded-lg`}
                   >
-                    <config.icon className={`h-4.5 w-4.5 ${config.color}`} />
+                    <config.icon className={`h-3.5 w-3.5 ${config.color} sm:h-4.5 sm:w-4.5`} />
                   </div>
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-2">
-                      <p className="text-sm font-semibold">{notification.title}</p>
+                      <p className="text-xs font-semibold sm:text-sm">{notification.title}</p>
                       {!notification.read && (
                         <span className="h-2 w-2 rounded-full bg-primary" />
                       )}
                     </div>
-                    <p className="mt-1 text-sm text-muted-foreground">
+                    <p className="mt-0.5 text-[11px] text-muted-foreground sm:mt-1 sm:text-sm">
                       {notification.message}
                     </p>
-                    <p className="mt-2 text-[11px] text-muted-foreground/60">
+                    <p className="mt-1 text-[9px] text-muted-foreground/60 sm:mt-2 sm:text-[11px]">
                       {notification.timestamp}
                     </p>
                   </div>

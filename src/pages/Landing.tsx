@@ -114,13 +114,13 @@ export default function Landing() {
       </motion.nav>
 
       {/* Hero */}
-      <section className="relative z-10 px-6 pt-24 pb-28 sm:px-10 sm:pt-32 sm:pb-36">
+      <section className="relative z-10 px-5 pt-16 pb-20 sm:px-10 sm:pt-24 sm:pb-28">
         <div className="mx-auto max-w-4xl text-center">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl"
+            className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl lg:text-6xl"
           >
             Helping every student
             <br />
@@ -131,7 +131,7 @@ export default function Landing() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.15 }}
-            className="mx-auto mt-6 max-w-xl text-base text-muted-foreground sm:text-lg"
+            className="mx-auto mt-4 max-w-xl text-sm text-muted-foreground sm:mt-6 sm:text-base lg:text-lg"
           >
             PathWay helps mentors and counsellors spot students who are falling
             behind — so they can step in early with the right support.
@@ -141,7 +141,7 @@ export default function Landing() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row"
+            className="mt-6 flex flex-col items-center justify-center gap-3 sm:mt-8 sm:flex-row"
           >
             <Button
               size="lg"
@@ -166,7 +166,7 @@ export default function Landing() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.5 }}
-            className="mx-auto mt-14 max-w-3xl"
+            className="mx-auto mt-10 max-w-3xl sm:mt-14"
           >
             <div className="rounded-xl border border-white/[0.08] bg-card/50 p-1">
               <div className="rounded-lg bg-background/80 p-5">
@@ -201,7 +201,7 @@ export default function Landing() {
       </section>
 
       {/* How It Works */}
-      <section className="relative z-10 px-6 py-20 sm:px-10">
+      <section className="relative z-10 px-5 py-16 sm:px-10 sm:py-20">
         <div className="mx-auto max-w-4xl">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
@@ -240,7 +240,7 @@ export default function Landing() {
       </section>
 
       {/* Features */}
-      <section className="relative z-10 px-6 py-20 sm:px-10">
+      <section className="relative z-10 px-5 py-16 sm:px-10 sm:py-20">
         <div className="mx-auto max-w-4xl">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
@@ -277,7 +277,7 @@ export default function Landing() {
       </section>
 
       {/* CTA */}
-      <section className="relative z-10 px-6 py-20 sm:px-10">
+      <section className="relative z-10 px-5 py-16 sm:px-10 sm:py-20">
         <div className="mx-auto max-w-2xl text-center">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
