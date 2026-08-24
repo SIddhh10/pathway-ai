@@ -2,21 +2,18 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router";
 import {
   Shield,
+  ArrowRight,
+  ChevronRight,
   Upload,
   BrainCircuit,
   AlertTriangle,
   MessageSquareWarning,
   BarChart3,
-  Users,
-  FileSpreadsheet,
   Bell,
-  ArrowRight,
-  GraduationCap,
-  TrendingDown,
   Eye,
-  CheckCircle2,
+  TrendingDown,
+  GraduationCap,
   Zap,
-  ChevronRight,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -33,56 +30,56 @@ const stagger = {
 const steps = [
   {
     icon: Upload,
-    title: "Upload Data",
-    desc: "Attendance, marks, subject history and fee records",
+    title: "Ingest Data",
+    desc: "Attendance records, exam scores, subject histories, and fee status from existing spreadsheets.",
   },
   {
     icon: BrainCircuit,
-    title: "AI Analysis",
-    desc: "Machine learning analyses multiple student factors",
+    title: "Analyse with ML",
+    desc: "A configurable model evaluates multiple risk signals across each student's profile.",
   },
   {
     icon: AlertTriangle,
-    title: "Risk Prediction",
-    desc: "Students classified into Low, Medium, and High Risk",
+    title: "Classify Risk",
+    desc: "Students are scored and grouped into low, medium, and high-risk tiers with transparent reasoning.",
   },
   {
     icon: MessageSquareWarning,
-    title: "Early Counselling",
-    desc: "Mentors and guardians receive timely alerts",
+    title: "Trigger Intervention",
+    desc: "Mentors and guardians receive automated alerts so counselling begins before failure.",
   },
 ];
 
 const features = [
   {
     icon: BrainCircuit,
-    title: "AI-Based Dropout Prediction",
-    desc: "ML models trained on historical patterns to predict at-risk students weeks before failure.",
+    title: "ML-Powered Risk Scoring",
+    desc: "A configurable prediction model trained on institutional data identifies at-risk students weeks before term-end failures.",
   },
   {
     icon: BarChart3,
-    title: "Unified Student Dashboard",
-    desc: "All student data—in attendance, marks, fees—consolidated into a single view.",
+    title: "Unified Student Data",
+    desc: "Attendance, marks, subject attempts, and fee records fused into a single queryable dashboard.",
   },
   {
-    icon: AlertTriangle,
-    title: "Colour-Coded Risk Levels",
-    desc: "Intuitive green, yellow, and red indicators for instant risk assessment.",
+    icon: TrendingDown,
+    title: "Colour-Coded Risk Tiers",
+    desc: "Green, amber, and red indicators surface at a glance which students need immediate attention.",
   },
   {
     icon: Eye,
-    title: "Explainable Risk Factors",
-    desc: "Transparent AI decisions with clear reasoning behind every risk score.",
+    title: "Explainable Predictions",
+    desc: "Every risk score ships with the factors that drove it—attendance, failed subjects, fee status—so counsellors trust the output.",
   },
   {
     icon: Bell,
-    title: "Automated Mentor Alerts",
-    desc: "Instant notifications to mentors when students cross risk thresholds.",
+    title: "Automated Alerts",
+    desc: "Threshold-based notifications push risk changes to mentors and guardians in real time.",
   },
   {
     icon: MessageSquareWarning,
-    title: "Guardian Notifications",
-    desc: "Keep parents informed and involved in the early intervention process.",
+    title: "Counselling Workflow",
+    desc: "Schedule, track, and complete counselling sessions directly from the dashboard without switching tools.",
   },
 ];
 
@@ -152,7 +149,7 @@ export default function Landing() {
           <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/20">
             <Shield className="h-5.5 w-5.5 text-primary" />
           </div>
-          <span className="text-lg font-bold tracking-tight">EduShield AI</span>
+          <span className="text-lg font-bold tracking-tight">PathWay</span>
         </div>
         <div className="flex items-center gap-3">
           <Button
@@ -182,7 +179,7 @@ export default function Landing() {
             className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.03] px-4 py-1.5 text-xs font-medium text-muted-foreground"
           >
             <Zap className="h-3.5 w-3.5 text-primary" />
-            AI-Powered Student Retention System
+            Drop-out prediction infrastructure for educational institutions
           </motion.div>
 
           <motion.h1
@@ -191,10 +188,9 @@ export default function Landing() {
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
             className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl"
           >
-            Predict Early.{" "}
-            <span className="text-gradient-blue">Support Better.</span>
+            Predict attrition.
             <br />
-            Prevent Dropouts.
+            <span className="text-gradient-blue">Enable earlier intervention.</span>
           </motion.h1>
 
           <motion.p
@@ -203,9 +199,9 @@ export default function Landing() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="mx-auto mt-6 max-w-2xl text-base text-muted-foreground sm:text-lg"
           >
-            EduShield AI identifies students at risk using academic, attendance,
-            financial, and performance data—helping mentors take action before it
-            is too late.
+            PathWay ingests attendance, academic performance, and financial data
+            to surface dropout risk before students fail—giving mentors and
+            counsellors the signal to act.
           </motion.p>
 
           <motion.div
@@ -219,7 +215,7 @@ export default function Landing() {
               onClick={() => navigate("/auth")}
               className="bg-primary text-primary-foreground hover:bg-primary/90 px-8"
             >
-              Get Started Free
+              Start Free Trial
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
             <Button
@@ -233,7 +229,7 @@ export default function Landing() {
             </Button>
           </motion.div>
 
-          {/* Hero Visual - Dashboard Preview */}
+          {/* Hero Visual — Dashboard Preview */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
@@ -242,12 +238,11 @@ export default function Landing() {
           >
             <div className="glass rounded-2xl border border-white/[0.08] p-1 shadow-2xl shadow-primary/[0.08]">
               <div className="rounded-xl bg-background/80 p-6">
-                {/* Mock dashboard header */}
                 <div className="mb-6 flex items-center justify-between">
                   <div>
                     <h3 className="text-sm font-semibold">Risk Overview</h3>
                     <p className="text-xs text-muted-foreground">
-                      1,250 students monitored
+                      1,250 students monitored across 4 departments
                     </p>
                   </div>
                   <div className="flex gap-2">
@@ -256,7 +251,6 @@ export default function Landing() {
                     <div className="h-2.5 w-2.5 rounded-full bg-risk-high" />
                   </div>
                 </div>
-                {/* Mock stat cards */}
                 <div className="grid grid-cols-4 gap-3">
                   {[
                     { label: "Total", value: "1,250", color: "text-foreground" },
@@ -277,7 +271,6 @@ export default function Landing() {
                     </div>
                   ))}
                 </div>
-                {/* Mock chart bars */}
                 <div className="mt-4 flex items-end gap-2 rounded-lg border border-white/[0.06] bg-white/[0.02] p-4">
                   {[65, 72, 58, 80, 75, 68, 85, 62, 70, 78, 55, 82].map(
                     (h, i) => (
@@ -310,7 +303,7 @@ export default function Landing() {
               How It Works
             </h2>
             <p className="mt-4 text-muted-foreground">
-              From raw data to actionable insights in four steps
+              From raw spreadsheets to actionable risk signals in four steps
             </p>
           </motion.div>
 
@@ -339,7 +332,6 @@ export default function Landing() {
                     {step.desc}
                   </p>
                 </div>
-                {/* Connector line for desktop */}
                 {i < steps.length - 1 && (
                   <div className="hidden lg:block absolute left-full top-1/2 -translate-y-1/2 w-6 border-t border-dashed border-primary/20" />
                 )}
@@ -360,10 +352,10 @@ export default function Landing() {
             className="mb-16 text-center"
           >
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-              Key Features
+              Key Capabilities
             </h2>
             <p className="mt-4 text-muted-foreground">
-              Everything you need to identify and support at-risk students
+              Built for institutions that need transparent, actionable dropout intelligence
             </p>
           </motion.div>
 
@@ -424,7 +416,7 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* CTA */}
       <section className="relative z-10 px-6 py-24 sm:px-10">
         <div className="mx-auto max-w-3xl text-center">
           <motion.div
@@ -435,11 +427,12 @@ export default function Landing() {
           >
             <GraduationCap className="mx-auto mb-6 h-12 w-12 text-primary" />
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-              Ready to Protect Your Students?
+              Start protecting student outcomes
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
-              Join hundreds of institutions using AI to identify at-risk students
-              early and provide timely support.
+              PathWay is purpose-built for public technical institutes that need
+              drop-out prediction without the cost of commercial analytics
+              platforms.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
               <Button
@@ -459,11 +452,10 @@ export default function Landing() {
       <footer className="relative z-10 border-t border-white/[0.06] px-6 py-8 sm:px-10">
         <div className="mx-auto max-w-5xl text-center">
           <p className="text-sm text-muted-foreground">
-            Empowering institutions to identify risks early and support every
-            student.
+            Empowering institutions to identify risk early and support every student through to graduation.
           </p>
           <p className="mt-2 text-xs text-muted-foreground/60">
-            © 2026 EduShield AI. Built for public technical institutes.
+            © 2026 PathWay. Built for public technical institutes.
           </p>
         </div>
       </footer>

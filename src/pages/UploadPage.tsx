@@ -72,7 +72,7 @@ export default function UploadPage() {
         <div>
           <h1 className="text-2xl font-bold tracking-tight">Upload Data</h1>
           <p className="text-sm text-muted-foreground">
-            Upload student data spreadsheets for AI analysis
+            Import student records for risk analysis
           </p>
         </div>
 
@@ -124,11 +124,10 @@ export default function UploadPage() {
               <div>
                 <p className="text-sm font-semibold text-risk-low">
                   Data Successfully Integrated
-                </p>
-                <p className="text-xs text-muted-foreground">
-                  All spreadsheets are ready for AI analysis. Click below to run
-                  the risk prediction model.
-                </p>
+                </p>                  <p className="text-xs text-muted-foreground">
+                    All datasets are integrated. Run the prediction model to update
+                    risk scores across every student.
+                  </p>
               </div>
             </div>
           </div>
@@ -154,19 +153,18 @@ export default function UploadPage() {
                 <div className="h-16 w-16 animate-spin rounded-full border-4 border-primary/20 border-t-primary" />
                 <BrainCircuit className="absolute left-1/2 top-1/2 h-7 w-7 -translate-x-1/2 -translate-y-1/2 text-primary" />
               </div>
-              <div className="mt-8 text-center">
-                <p className="text-sm font-semibold" id="analyzing-text">
-                  Processing student records...
-                </p>
-                <p className="mt-1 text-xs text-muted-foreground">
-                  AI model is analysing patterns and calculating risk scores
-                </p>
+              <div className="mt-8 text-center">                    <p className="text-sm font-semibold" id="analyzing-text">
+                      Processing student records...
+                    </p>
+                    <p className="mt-1 text-xs text-muted-foreground">
+                      Model is evaluating patterns and recalculating risk scores
+                    </p>
               </div>
               <div className="mt-6 flex flex-col items-center gap-2 text-xs text-muted-foreground">
                 <AnalyzingStep text="Analysing attendance patterns..." delay={0} />
                 <AnalyzingStep text="Detecting academic decline..." delay={800} />
                 <AnalyzingStep text="Evaluating financial indicators..." delay={1600} />
-                <AnalyzingStep text="Calculating dropout risk..." delay={2400} />
+                <AnalyzingStep text="Computing dropout risk scores..." delay={2400} />
                 <AnalyzingStep text="Generating intervention recommendations..." delay={3200} />
               </div>
             </CardContent>
@@ -184,8 +182,8 @@ export default function UploadPage() {
                     Analysis Complete
                   </p>
                   <p className="text-sm text-muted-foreground">
-                    Risk scores have been calculated for all 1,250 students.
-                    Results are now visible on the dashboard.
+                    Risk scores computed for 1,250 students. Results are reflected
+                    on the dashboard.
                   </p>
                 </div>
               </div>

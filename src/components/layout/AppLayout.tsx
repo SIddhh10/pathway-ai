@@ -53,10 +53,10 @@ export default function AppLayout({ children }: AppLayoutProps) {
           {!collapsed && (
             <div className="overflow-hidden">
               <h1 className="text-sm font-bold tracking-tight text-foreground">
-                EduShield AI
+                PathWay
               </h1>
               <p className="text-[10px] text-muted-foreground">
-                Dropout Prediction
+                Student Risk Platform
               </p>
             </div>
           )}

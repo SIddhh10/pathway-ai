@@ -56,7 +56,7 @@ export default function NotificationsPage() {
           <div>
             <h1 className="text-2xl font-bold tracking-tight">Notifications</h1>
             <p className="text-sm text-muted-foreground">
-              Automated alerts and system updates
+              Automated risk alerts and system events
             </p>
           </div>
           <div className="flex items-center gap-2">

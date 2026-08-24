@@ -54,7 +54,7 @@ export default function CounsellingPage() {
           <div>
             <h1 className="text-2xl font-bold tracking-tight">Counselling</h1>
             <p className="text-sm text-muted-foreground">
-              Manage counselling sessions for at-risk students
+              Schedule and track counselling sessions for at-risk students
             </p>
           </div>
           <Button className="gap-2 bg-primary text-primary-foreground hover:bg-primary/90">

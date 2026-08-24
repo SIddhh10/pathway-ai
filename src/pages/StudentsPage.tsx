@@ -56,7 +56,7 @@ export default function StudentsPage() {
         <div>
           <h1 className="text-2xl font-bold tracking-tight">Students</h1>
           <p className="text-sm text-muted-foreground">
-            View and manage all students and their risk assessments
+            All enrolled students with risk assessments and key metrics
           </p>
         </div>
 

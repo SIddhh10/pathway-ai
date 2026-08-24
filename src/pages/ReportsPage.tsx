@@ -63,7 +63,7 @@ export default function ReportsPage() {
           <div>
             <h1 className="text-2xl font-bold tracking-tight">Reports</h1>
             <p className="text-sm text-muted-foreground">
-              Analytics summaries and downloadable reports
+              Summary analytics and downloadable exports
             </p>
           </div>
         </div>

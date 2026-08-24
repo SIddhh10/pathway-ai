@@ -98,10 +98,10 @@ export default function DashboardMain() {
         {/* Header */}
         <div>
           <h1 className="text-2xl font-bold tracking-tight">
-            Risk Dashboard
+            Dashboard
           </h1>
           <p className="text-sm text-muted-foreground">
-            Real-time overview of student dropout risk indicators
+            Live overview of institutional dropout risk indicators
           </p>
         </div>
 

@@ -116,7 +116,7 @@ export default function StudentAnalysis() {
               Student Analysis
             </h1>
             <p className="text-sm text-muted-foreground">
-              AI-powered risk assessment and recommendations
+              Risk assessment breakdown and recommended actions
             </p>
           </div>
         </div>
