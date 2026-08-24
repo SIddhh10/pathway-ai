@@ -188,9 +188,9 @@ export default function Landing() {
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
             className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl"
           >
-            Predict attrition.
+            Helping every student
             <br />
-            <span className="text-gradient-blue">Enable earlier intervention.</span>
+            <span className="text-gradient-blue">stay on track.</span>
           </motion.h1>
 
           <motion.p
