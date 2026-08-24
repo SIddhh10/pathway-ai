@@ -70,9 +70,9 @@ export default function UploadPage() {
     <AppLayout>
       <div className="space-y-6">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight">Upload Data</h1>
+          <h1 className="text-xl font-bold tracking-tight">Upload Data</h1>
           <p className="text-sm text-muted-foreground">
-            Import student records for risk analysis
+            Import student records to update risk scores
           </p>
         </div>
 
@@ -157,7 +157,7 @@ export default function UploadPage() {
                       Processing student records...
                     </p>
                     <p className="mt-1 text-xs text-muted-foreground">
-                      Model is evaluating patterns and recalculating risk scores
+                      Calculating risk scores based on the latest data
                     </p>
               </div>
               <div className="mt-6 flex flex-col items-center gap-2 text-xs text-muted-foreground">

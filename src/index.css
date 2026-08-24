@@ -135,29 +135,10 @@
 }
 
 @layer utilities {
-  .glass {
-    @apply bg-card/60 backdrop-blur-xl border border-white/[0.06];
-  }
-  .glow-blue {
-    box-shadow: 0 0 30px oklch(0.6 0.2 260 / 0.15);
-  }
-  .glow-purple {
-    box-shadow: 0 0 30px oklch(0.65 0.22 280 / 0.15);
-  }
   .text-gradient-blue {
     background: linear-gradient(135deg, oklch(0.6 0.2 260), oklch(0.65 0.22 280));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-  }
-  .animate-float {
-    animation: float 6s ease-in-out infinite;
-  }
-  .animate-float-delay {
-    animation: float 6s ease-in-out 2s infinite;
-  }
-  @keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
   }
 }

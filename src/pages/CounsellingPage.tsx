@@ -52,9 +52,9 @@ export default function CounsellingPage() {
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold tracking-tight">Counselling</h1>
+            <h1 className="text-xl font-bold tracking-tight">Counselling</h1>
             <p className="text-sm text-muted-foreground">
-              Schedule and track counselling sessions for at-risk students
+              Upcoming and completed sessions
             </p>
           </div>
           <Button className="gap-2 bg-primary text-primary-foreground hover:bg-primary/90">
@@ -70,7 +70,7 @@ export default function CounsellingPage() {
             { label: "Completed", value: completed.length, color: "text-risk-low" },
             { label: "Total", value: counsellingSessions.length, color: "text-foreground" },
           ].map((stat) => (
-            <Card key={stat.label} className="border-white/[0.06] bg-card/60 backdrop-blur-sm">
+            <Card key={stat.label} className="border-white/[0.06] bg-card/40">
               <CardContent className="p-4">
                 <p className="text-xs text-muted-foreground">{stat.label}</p>
                 <p className={`mt-1 text-2xl font-bold ${stat.color}`}>
@@ -82,7 +82,7 @@ export default function CounsellingPage() {
         </div>
 
         {/* Upcoming Sessions */}
-        <Card className="border-white/[0.06] bg-card/60 backdrop-blur-sm">
+        <Card className="border-white/[0.06] bg-card/40">
           <CardHeader>
             <CardTitle className="text-sm font-medium">
               Upcoming Sessions
@@ -120,26 +120,11 @@ export default function CounsellingPage() {
                       </div>
                     </div>
                     <div className="flex items-center gap-3">
-                      <span
-                        className={`flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-medium ${
-                          session.riskLevel === "high"
-                            ? "bg-risk-high/10 text-risk-high"
-                            : session.riskLevel === "medium"
-                              ? "bg-risk-medium/10 text-risk-medium"
-                              : "bg-risk-low/10 text-risk-low"
-                        }`}
-                      >
-                        <span
-                          className={`h-1.5 w-1.5 rounded-full ${
-                            session.riskLevel === "high"
-                              ? "bg-risk-high"
-                              : session.riskLevel === "medium"
-                                ? "bg-risk-medium"
-                                : "bg-risk-low"
-                          }`}
-                        />
-                        {session.riskLevel} risk
-                      </span>
+                      {session.notes && (
+                        <p className="mt-1.5 text-[11px] text-muted-foreground italic max-w-md">
+                          {session.notes}
+                        </p>
+                      )}
                       <span
                         className={`flex items-center gap-1 rounded-full px-2.5 py-1 text-[10px] font-medium ${config.bg} ${config.color}`}
                       >
@@ -155,7 +140,7 @@ export default function CounsellingPage() {
         </Card>
 
         {/* Completed Sessions */}
-        <Card className="border-white/[0.06] bg-card/60 backdrop-blur-sm">
+        <Card className="border-white/[0.06] bg-card/40">
           <CardHeader>
             <CardTitle className="text-sm font-medium">
               Completed Sessions
@@ -179,6 +164,11 @@ export default function CounsellingPage() {
                         <span>{session.date}</span>
                         <span>{session.time}</span>
                       </div>
+                      {session.notes && (
+                        <p className="mt-1.5 text-[11px] text-muted-foreground italic max-w-md">
+                          {session.notes}
+                        </p>
+                      )}
                     </div>
                   </div>
                   <span className="flex items-center gap-1 rounded-full bg-risk-low/10 px-2.5 py-1 text-[10px] font-medium text-risk-low">

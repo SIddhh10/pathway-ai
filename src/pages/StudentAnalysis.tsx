@@ -61,7 +61,12 @@ function CircularScore({ score, level }: { score: number; level: string }) {
           className="text-[10px] font-semibold uppercase tracking-wider"
           style={{ color }}
         >
-          {level} Risk
+          {level === "high"
+            ? "Needs Attention"
+            : level === "medium"
+              ? "Monitor"
+              : "On Track"
+          }
         </div>
       </div>
     </div>
@@ -124,7 +129,7 @@ export default function StudentAnalysis() {
         {/* Profile + Risk Score */}
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
           {/* Student Profile */}
-          <Card className="border-white/[0.06] bg-card/60 backdrop-blur-sm lg:col-span-1">
+          <Card className="border-white/[0.06] bg-card/40 lg:col-span-1">
             <CardHeader>
               <CardTitle className="text-sm font-medium">
                 Student Profile
@@ -200,11 +205,11 @@ export default function StudentAnalysis() {
           </Card>
 
           {/* AI Risk Score */}
-          <Card className="border-white/[0.06] bg-card/60 backdrop-blur-sm lg:col-span-2">
+          <Card className="border-white/[0.06] bg-card/40 lg:col-span-2">
             <CardHeader>
-              <CardTitle className="text-sm font-medium">
-                AI Dropout Risk Score
-              </CardTitle>
+            <CardTitle className="text-sm font-medium">
+              Risk Score
+            </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="flex flex-col items-center gap-6 sm:flex-row sm:items-start">
@@ -242,7 +247,7 @@ export default function StudentAnalysis() {
                     <div className="flex items-center gap-2 rounded-lg border border-risk-low/10 bg-risk-low/[0.04] p-3">
                       <CheckCircle2 className="h-4 w-4 text-risk-low" />
                       <span className="text-xs text-risk-low">
-                        No risk factors detected. Student is performing well.
+                        No concerns identified. Student is on track.
                       </span>
                     </div>
                   )}
@@ -253,7 +258,7 @@ export default function StudentAnalysis() {
         </div>
 
         {/* Recommended Action */}
-        <Card className="border-white/[0.06] bg-card/60 backdrop-blur-sm">
+        <Card className="border-white/[0.06] bg-card/40">
           <CardHeader>
             <CardTitle className="text-sm font-medium">
               Recommended Action

@@ -47,9 +47,9 @@ export default function RiskAnalysisPage() {
   return (
     <AppLayout>
       <div className="space-y-6">
-        <div>            <h1 className="text-2xl font-bold tracking-tight">Risk Analysis</h1>
+        <div>            <h1 className="text-xl font-bold tracking-tight">Risk Analysis</h1>
             <p className="text-sm text-muted-foreground">
-              Model insights and risk factor breakdown
+              How risk scores are calculated
             </p>
         </div>
 

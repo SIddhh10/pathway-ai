@@ -54,9 +54,9 @@ export default function NotificationsPage() {
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold tracking-tight">Notifications</h1>
+            <h1 className="text-xl font-bold tracking-tight">Notifications</h1>
             <p className="text-sm text-muted-foreground">
-              Automated risk alerts and system events
+              Recent alerts and updates
             </p>
           </div>
           <div className="flex items-center gap-2">
@@ -83,7 +83,7 @@ export default function NotificationsPage() {
             return (
               <Card
                 key={notification.id}
-                className={`border-white/[0.06] bg-card/60 backdrop-blur-sm transition-all duration-200 ${
+                className={`border-white/[0.06] bg-card/40 transition-all duration-200 ${
                   !notification.read
                     ? "border-l-2 border-l-primary bg-primary/[0.02]"
                     : "opacity-70"

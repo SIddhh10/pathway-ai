@@ -54,9 +54,9 @@ export default function StudentsPage() {
     <AppLayout>
       <div className="space-y-6">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight">Students</h1>
+          <h1 className="text-xl font-bold tracking-tight">Students</h1>
           <p className="text-sm text-muted-foreground">
-            All enrolled students with risk assessments and key metrics
+            All enrolled students with their current risk status
           </p>
         </div>
 
@@ -88,10 +88,10 @@ export default function StudentsPage() {
                 {filter === "all"
                   ? "All"
                   : filter === "low"
-                    ? "🟢 Low"
+                    ? "On Track"
                     : filter === "medium"
-                      ? "🟡 Medium"
-                      : "🔴 High"}
+                      ? "Monitor"
+                      : "Needs Attention"}
                 <span className="ml-1 text-[10px] opacity-60">
                   ({riskCounts[filter]})
                 </span>
@@ -101,7 +101,7 @@ export default function StudentsPage() {
         </div>
 
         {/* Table */}
-        <Card className="border-white/[0.06] bg-card/60 backdrop-blur-sm">
+        <Card className="border-white/[0.06] bg-card/40">
           <CardContent className="p-0">
             <div className="overflow-x-auto">
               <table className="w-full text-left text-sm">
@@ -139,12 +139,12 @@ export default function StudentsPage() {
                         onClick={() => toggleSort("riskScore")}
                         className="flex items-center gap-1 text-xs font-medium text-muted-foreground hover:text-foreground"
                       >
-                        AI Risk Score
+                        Risk Score
                         <ArrowUpDown className="h-3 w-3" />
                       </button>
                     </th>
                     <th className="px-5 py-3.5 text-xs font-medium text-muted-foreground">
-                      Risk Level
+                      Status
                     </th>
                     <th className="px-5 py-3.5 text-xs font-medium text-muted-foreground">
                       Action
@@ -229,7 +229,12 @@ export default function StudentsPage() {
                                   : "text-risk-low"
                             }`}
                           >
-                            {student.riskLevel}
+                            {student.riskLevel === "high"
+                              ? "Needs Attention"
+                              : student.riskLevel === "medium"
+                                ? "Monitor"
+                                : "On Track"
+                            }
                           </span>
                         </span>
                       </td>

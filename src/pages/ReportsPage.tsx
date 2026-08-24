@@ -61,9 +61,9 @@ export default function ReportsPage() {
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold tracking-tight">Reports</h1>
+            <h1 className="text-xl font-bold tracking-tight">Reports</h1>
             <p className="text-sm text-muted-foreground">
-              Summary analytics and downloadable exports
+              Summary data and downloadable exports
             </p>
           </div>
         </div>
