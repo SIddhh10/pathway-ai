@@ -2,7 +2,6 @@ import { authTables } from "@convex-dev/auth/server";
 import { defineSchema, defineTable } from "convex/server";
 import { Infer, v } from "convex/values";
 
-// default user roles. can add / remove based on the project as needed
 export const ROLES = {
   ADMIN: "admin",
   USER: "user",
@@ -18,26 +17,84 @@ export type Role = Infer<typeof roleValidator>;
 
 const schema = defineSchema(
   {
-    // default auth tables using convex auth.
-    ...authTables, // do not remove or modify
+    ...authTables,
 
-    // the users table is the default users table that is brought in by the authTables
     users: defineTable({
-      name: v.optional(v.string()), // name of the user. do not remove
-      image: v.optional(v.string()), // image of the user. do not remove
-      email: v.optional(v.string()), // email of the user. do not remove
-      emailVerificationTime: v.optional(v.number()), // email verification time. do not remove
-      isAnonymous: v.optional(v.boolean()), // is the user anonymous. do not remove
+      name: v.optional(v.string()),
+      image: v.optional(v.string()),
+      email: v.optional(v.string()),
+      emailVerificationTime: v.optional(v.number()),
+      isAnonymous: v.optional(v.boolean()),
+      role: v.optional(roleValidator),
+    }).index("email", ["email"]),
 
-      role: v.optional(roleValidator), // role of the user. do not remove
-    }).index("email", ["email"]), // index for the email. do not remove or modify
+    students: defineTable({
+      userId: v.id("users"),
+      name: v.string(),
+      rollNumber: v.string(),
+      course: v.string(),
+      semester: v.number(),
+      mentor: v.string(),
+      attendance: v.number(),
+      marks: v.number(),
+      failedSubjects: v.number(),
+      totalSubjects: v.number(),
+      feeStatus: v.union(v.literal("paid"), v.literal("pending"), v.literal("overdue")),
+      feeAmount: v.number(),
+      riskScore: v.number(),
+      riskLevel: v.union(v.literal("low"), v.literal("medium"), v.literal("high")),
+      riskFactors: v.array(v.string()),
+      recommendedAction: v.string(),
+      trend: v.union(v.literal("improving"), v.literal("declining"), v.literal("stable")),
+      lastUpdated: v.string(),
+    })
+      .index("by_user", ["userId"])
+      .index("by_risk_level", ["userId", "riskLevel"])
+      .index("by_risk_score", ["userId", "riskScore"]),
 
-    // add other tables here
+    counsellingSessions: defineTable({
+      userId: v.id("users"),
+      studentId: v.id("students"),
+      studentName: v.string(),
+      mentorName: v.string(),
+      date: v.string(),
+      time: v.string(),
+      riskLevel: v.union(v.literal("low"), v.literal("medium"), v.literal("high")),
+      status: v.union(
+        v.literal("scheduled"),
+        v.literal("completed"),
+        v.literal("cancelled"),
+        v.literal("pending")
+      ),
+      notes: v.optional(v.string()),
+    })
+      .index("by_user", ["userId"])
+      .index("by_student", ["userId", "studentId"])
+      .index("by_status", ["userId", "status"]),
 
-    // tableName: defineTable({
-    //   ...
-    //   // table fields
-    // }).index("by_field", ["field"])
+    notifications: defineTable({
+      userId: v.id("users"),
+      type: v.union(
+        v.literal("alert"),
+        v.literal("warning"),
+        v.literal("improvement"),
+        v.literal("info")
+      ),
+      title: v.string(),
+      message: v.string(),
+      studentId: v.optional(v.id("students")),
+      read: v.boolean(),
+    })
+      .index("by_user", ["userId"])
+      .index("by_user_read", ["userId", "read"]),
+
+    monthlyTrendData: defineTable({
+      userId: v.id("users"),
+      month: v.string(),
+      high: v.number(),
+      medium: v.number(),
+      low: v.number(),
+    }).index("by_user", ["userId"]),
   },
   {
     schemaValidation: false,

@@ -1,49 +1,68 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import { useQuery, useMutation } from "convex/react";
+import { api } from "@/convex/_generated/api";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Search, Eye, ArrowUpDown, Filter } from "lucide-react";
-import { students } from "@/lib/mock-data";
+import { Search, Eye, ArrowUpDown, Filter, Loader2, Trash2 } from "lucide-react";
 import AppLayout from "@/components/layout/AppLayout";
 
 type RiskFilter = "all" | "low" | "medium" | "high";
 
-function StudentCard({ student, onNavigate }: { student: typeof students[0]; onNavigate: () => void }) {
+function StudentCard({
+  student,
+  onNavigate,
+  onDelete,
+}: {
+  student: any;
+  onNavigate: () => void;
+  onDelete: () => void;
+}) {
   return (
-    <div
-      className="rounded-lg border border-white/[0.06] bg-white/[0.02] p-3"
-      onClick={onNavigate}
-    >
+    <div className="rounded-lg border border-white/[0.06] bg-white/[0.02] p-3">
       <div className="flex items-start justify-between">
-        <div className="min-w-0">
+        <div className="min-w-0 cursor-pointer" onClick={onNavigate}>
           <p className="text-sm font-medium truncate">{student.name}</p>
           <p className="text-[10px] text-muted-foreground font-mono">{student.rollNumber}</p>
         </div>
-        <span
-          className={`flex shrink-0 items-center gap-1 rounded-md px-1.5 py-0.5 text-[9px] font-medium ${
-            student.riskLevel === "high"
-              ? "bg-risk-high/10 text-risk-high"
-              : student.riskLevel === "medium"
-                ? "bg-risk-medium/10 text-risk-medium"
-                : "bg-risk-low/10 text-risk-low"
-          }`}
-        >
+        <div className="flex items-center gap-1.5">
           <span
-            className={`h-1.5 w-1.5 rounded-full ${
+            className={`flex shrink-0 items-center gap-1 rounded-md px-1.5 py-0.5 text-[9px] font-medium ${
               student.riskLevel === "high"
-                ? "bg-risk-high"
+                ? "bg-risk-high/10 text-risk-high"
                 : student.riskLevel === "medium"
-                  ? "bg-risk-medium"
-                  : "bg-risk-low"
+                  ? "bg-risk-medium/10 text-risk-medium"
+                  : "bg-risk-low/10 text-risk-low"
             }`}
-          />
-          {student.riskLevel === "high"
-            ? "Needs Attention"
-            : student.riskLevel === "medium"
-              ? "Monitor"
-              : "On Track"}
-        </span>
+          >
+            <span
+              className={`h-1.5 w-1.5 rounded-full ${
+                student.riskLevel === "high"
+                  ? "bg-risk-high"
+                  : student.riskLevel === "medium"
+                    ? "bg-risk-medium"
+                    : "bg-risk-low"
+              }`}
+            />
+            {student.riskLevel === "high"
+              ? "Needs Attention"
+              : student.riskLevel === "medium"
+                ? "Monitor"
+                : "On Track"}
+          </span>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="h-6 w-6 text-muted-foreground hover:text-risk-high"
+            onClick={(e) => {
+              e.stopPropagation();
+              onDelete();
+            }}
+          >
+            <Trash2 className="h-3 w-3" />
+          </Button>
+        </div>
       </div>
       <div className="mt-2 grid grid-cols-3 gap-2">
         <div>
@@ -62,7 +81,7 @@ function StudentCard({ student, onNavigate }: { student: typeof students[0]; onN
         </div>
         <div>
           <p className="text-[9px] text-muted-foreground">Avg. Marks</p>
-          <p className="text-xs font-semibold">{student.averageMarks}%</p>
+          <p className="text-xs font-semibold">{student.marks}%</p>
         </div>
         <div>
           <p className="text-[9px] text-muted-foreground">Fee</p>
@@ -79,7 +98,7 @@ function StudentCard({ student, onNavigate }: { student: typeof students[0]; onN
           </span>
         </div>
       </div>
-      <div className="mt-2 flex items-center justify-between">
+      <div className="mt-2 flex items-center justify-between cursor-pointer" onClick={onNavigate}>
         <span
           className={`text-xs font-bold ${
             student.riskScore >= 70
@@ -101,26 +120,27 @@ export default function StudentsPage() {
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
   const [riskFilter, setRiskFilter] = useState<RiskFilter>("all");
-  const [sortKey, setSortKey] = useState<"riskScore" | "attendance" | "averageMarks">("riskScore");
+  const [sortKey, setSortKey] = useState<"riskScore" | "attendance" | "marks">("riskScore");
   const [sortDir, setSortDir] = useState<"asc" | "desc">("desc");
 
-  const filtered = students
-    .filter((s) => {
-      if (riskFilter !== "all" && s.riskLevel !== riskFilter) return false;
-      if (search) {
-        const q = search.toLowerCase();
-        return (
-          s.name.toLowerCase().includes(q) ||
-          s.rollNumber.toLowerCase().includes(q) ||
-          s.course.toLowerCase().includes(q)
-        );
-      }
-      return true;
-    })
-    .sort((a, b) => {
-      const mul = sortDir === "desc" ? -1 : 1;
-      return (a[sortKey] - b[sortKey]) * mul;
-    });
+  const students = useQuery(api.students.list, {
+    riskLevel: riskFilter === "all" ? undefined : riskFilter,
+    search: search || undefined,
+    sortKey,
+    sortDir,
+  });
+
+  const removeStudent = useMutation(api.students.remove);
+  const stats = useQuery(api.students.dashboardStats);
+
+  const loading = students === undefined;
+
+  const riskCounts = {
+    all: stats?.totalStudents ?? 0,
+    low: stats?.lowRisk ?? 0,
+    medium: stats?.mediumRisk ?? 0,
+    high: stats?.highRisk ?? 0,
+  };
 
   const toggleSort = (key: typeof sortKey) => {
     if (sortKey === key) {
@@ -131,12 +151,21 @@ export default function StudentsPage() {
     }
   };
 
-  const riskCounts = {
-    all: students.length,
-    low: students.filter((s) => s.riskLevel === "low").length,
-    medium: students.filter((s) => s.riskLevel === "medium").length,
-    high: students.filter((s) => s.riskLevel === "high").length,
+  const handleDelete = async (id: string) => {
+    if (confirm("Delete this student? This cannot be undone.")) {
+      await removeStudent({ studentId: id as any });
+    }
   };
+
+  if (loading) {
+    return (
+      <AppLayout>
+        <div className="flex items-center justify-center py-20">
+          <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
+        </div>
+      </AppLayout>
+    );
+  }
 
   return (
     <AppLayout>
@@ -182,20 +211,28 @@ export default function StudentsPage() {
           </div>
         </div>
 
+        {/* Empty state */}
+        {(students ?? []).length === 0 && (
+          <Card className="border-white/[0.06] bg-card/40">
+            <CardContent className="flex flex-col items-center justify-center py-12">
+              <p className="text-sm font-medium text-muted-foreground">No students found</p>
+              <p className="mt-1 text-xs text-muted-foreground/60">
+                {search ? "Try a different search term" : "Add students via the Upload page"}
+              </p>
+            </CardContent>
+          </Card>
+        )}
+
         {/* Mobile: Card view */}
         <div className="space-y-2 md:hidden">
-          {filtered.map((student) => (
+          {(students ?? []).map((student) => (
             <StudentCard
-              key={student.id}
+              key={student._id}
               student={student}
-              onNavigate={() => navigate(`/dashboard/student/${student.id}`)}
+              onNavigate={() => navigate(`/dashboard/student/${student._id}`)}
+              onDelete={() => handleDelete(student._id)}
             />
           ))}
-          {filtered.length === 0 && (
-            <p className="py-8 text-center text-xs text-muted-foreground">
-              No students found matching your criteria.
-            </p>
-          )}
         </div>
 
         {/* Desktop: Table view */}
@@ -213,7 +250,7 @@ export default function StudentsPage() {
                       </button>
                     </th>
                     <th className="px-4 py-3">
-                      <button onClick={() => toggleSort("averageMarks")} className="flex items-center gap-1 text-[11px] font-medium text-muted-foreground hover:text-foreground">
+                      <button onClick={() => toggleSort("marks")} className="flex items-center gap-1 text-[11px] font-medium text-muted-foreground hover:text-foreground">
                         Avg. Marks <ArrowUpDown className="h-3 w-3" />
                       </button>
                     </th>
@@ -228,8 +265,8 @@ export default function StudentsPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {filtered.map((student) => (
-                    <tr key={student.id} className="border-b border-white/[0.04] hover:bg-white/[0.02]">
+                  {(students ?? []).map((student) => (
+                    <tr key={student._id} className="border-b border-white/[0.04] hover:bg-white/[0.02]">
                       <td className="px-4 py-3 font-medium">{student.name}</td>
                       <td className="px-4 py-3 text-muted-foreground font-mono text-xs">{student.rollNumber}</td>
                       <td className="px-4 py-3">
@@ -237,7 +274,7 @@ export default function StudentsPage() {
                           {student.attendance}%
                         </span>
                       </td>
-                      <td className="px-4 py-3 text-xs text-muted-foreground">{student.averageMarks}%</td>
+                      <td className="px-4 py-3 text-xs text-muted-foreground">{student.marks}%</td>
                       <td className="px-4 py-3">
                         <span className={`rounded-md px-1.5 py-0.5 text-[10px] font-medium ${student.feeStatus === "paid" ? "bg-risk-low/10 text-risk-low" : student.feeStatus === "pending" ? "bg-risk-medium/10 text-risk-medium" : "bg-risk-high/10 text-risk-high"}`}>
                           {student.feeStatus === "paid" ? "Paid" : student.feeStatus === "pending" ? "Pending" : "Overdue"}
@@ -257,20 +294,20 @@ export default function StudentsPage() {
                         </span>
                       </td>
                       <td className="px-4 py-3">
-                        <Button variant="ghost" size="sm" onClick={() => navigate(`/dashboard/student/${student.id}`)} className="gap-1.5 text-xs text-primary hover:text-primary/80">
-                          <Eye className="h-3.5 w-3.5" /> View
-                        </Button>
+                        <div className="flex items-center gap-1">
+                          <Button variant="ghost" size="sm" onClick={() => navigate(`/dashboard/student/${student._id}`)} className="gap-1.5 text-xs text-primary hover:text-primary/80">
+                            <Eye className="h-3.5 w-3.5" /> View
+                          </Button>
+                          <Button variant="ghost" size="sm" onClick={() => handleDelete(student._id)} className="text-xs text-muted-foreground hover:text-risk-high">
+                            <Trash2 className="h-3.5 w-3.5" />
+                          </Button>
+                        </div>
                       </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
-            {filtered.length === 0 && (
-              <div className="py-12 text-center text-sm text-muted-foreground">
-                No students found matching your criteria.
-              </div>
-            )}
           </CardContent>
         </Card>
       </div>
